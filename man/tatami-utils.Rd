@@ -2,6 +2,8 @@
 % Please edit documentation in R/tatami-utils.R
 \name{tatami-utils}
 \alias{tatami-utils}
+\alias{tatami.row}
+\alias{tatami.column}
 \alias{tatami.row.medians}
 \alias{tatami.column.medians}
 \alias{tatami.row.sums}
