@@ -74,7 +74,10 @@
 #' 
 #' For \code{tatami.multiply}, a numeric matrix containing the matrix product of \code{x} and \code{other}.
 #'
-#' For \code{tatami.sums}, a numeric vector containing the row or column sums, respectively.
+#' For \code{tatami.sums}, a numeric vector containing the row or column sums depending on \code{row=}.
+#'
+#' For \code{tatami.variances}, a list containing the numeric vectors \code{mean} and \code{variance}.
+#' These containing the row/column means and variances, respectively, depending on \code{row=}.
 #'
 #' For \code{tatami.sums.by.group}, a numeric matrix is returned.
 #' \itemize{
@@ -244,6 +247,12 @@ tatami.multiply <- function(x, val, right, num.threads) {
 #' @rdname tatami-utils
 tatami.sums <- function(x, row, num.threads) {
     tatami_sums(x, row, num.threads)
+}
+
+#' @export
+#' @rdname tatami-utils
+tatami.variances <- function(x, row, num.threads) {
+    tatami_variances(x, row, num.threads)
 }
 
 #' @export

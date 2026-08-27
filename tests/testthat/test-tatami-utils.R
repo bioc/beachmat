@@ -74,6 +74,30 @@ test_that("dimwise medians work as expected with a more interesting dense matrix
     expect_equal(tatami.column.medians(ptr, 2), cref)
 })
 
+test_that("dimwise variances work as expected", { 
+    ptr1 <- initializeCpp(x1)
+
+    out <- tatami.variances(ptr1, row=TRUE, num.threads=1)
+    expect_equal(out$mean, rowMeans(x1))
+    expect_equal(out$variance, apply(x1, 1, var))
+
+    out <- tatami.variances(ptr1, row=FALSE, num.threads=2)
+    expect_equal(out$mean, colMeans(x1))
+    expect_equal(out$variance, apply(x1, 2, var))
+
+    # Expected results with dense matrices.
+    mat <- matrix(runif(1000), 25, 40)
+    dptr <- initializeCpp(mat)
+
+    out <- tatami.variances(dptr, row=TRUE, num.threads=2)
+    expect_equal(out$mean, rowMeans(mat))
+    expect_equal(out$variance, apply(mat, 1, var))
+
+    out <- tatami.variances(dptr, row=FALSE, num.threads=1)
+    expect_equal(out$mean, colMeans(mat))
+    expect_equal(out$variance, apply(mat, 2, var))
+})
+
 test_that("bind works as expected", {
     ptr1 <- initializeCpp(x1)
     ptr2 <- initializeCpp(x2)

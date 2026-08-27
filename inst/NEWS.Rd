@@ -7,6 +7,8 @@
 
 \item Improved efficiency of \code{tatami.multiply()} with new C++ algorithms.
 This comes at the cost of not correctly handling non-finite values in multiplications involving sparse matrices.
+
+\item Added a \code{tatami.variances()} function to easily compute means and variances from an initialized pointer.
 }}
 
 \section{Version 2.28.0}{\itemize{

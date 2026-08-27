@@ -26,6 +26,7 @@
 \alias{tatami.realize}
 \alias{tatami.multiply}
 \alias{tatami.sums}
+\alias{tatami.variances}
 \alias{tatami.sums.by.group}
 \alias{tatami.medians}
 \alias{tatami.nan.counts}
@@ -66,6 +67,8 @@ tatami.realize(x, num.threads)
 tatami.multiply(x, val, right, num.threads)
 
 tatami.sums(x, row, num.threads)
+
+tatami.variances(x, row, num.threads)
 
 tatami.sums.by.group(x, group, num.groups, row, num.threads)
 
@@ -158,7 +161,10 @@ The exact class depends on whether \code{x} refers to a sparse matrix.
 
 For \code{tatami.multiply}, a numeric matrix containing the matrix product of \code{x} and \code{other}.
 
-For \code{tatami.sums}, a numeric vector containing the row or column sums, respectively.
+For \code{tatami.sums}, a numeric vector containing the row or column sums depending on \code{row=}.
+
+For \code{tatami.variances}, a list containing the numeric vectors \code{mean} and \code{variance}.
+These containing the row/column means and variances, respectively, depending on \code{row=}.
 
 For \code{tatami.sums.by.group}, a numeric matrix is returned.
 \itemize{

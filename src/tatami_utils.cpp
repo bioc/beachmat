@@ -65,6 +65,32 @@ Rcpp::NumericVector tatami_sums(SEXP raw_input, bool row, int threads) {
 }
 
 //[[Rcpp::export(rng=false)]]
+Rcpp::List tatami_variances(SEXP raw_input, bool row, int threads) {
+    tatami_stats::VarianceOptions opt;
+    opt.num_threads = threads;
+    if (threads < 1) {
+        throw std::runtime_error("'threads' should be a positive integer");
+    }
+
+    Rtatami::BoundNumericPointer input(raw_input);
+    const auto NR = input->ptr->nrow();
+    const auto NC = input->ptr->ncol();
+
+    Rcpp::NumericVector output_means(row ? NR : NC);
+    Rcpp::NumericVector output_variances(row ? NR : NC);
+
+    tatami_stats::VarianceBuffers<double> buffers;
+    buffers.mean = output_means.begin();
+    buffers.variance = output_variances.begin();
+    tatami_stats::variance(row, *(input->ptr), buffers, opt);
+
+    return Rcpp::List::create(
+        Rcpp::Named("mean") = output_means,
+        Rcpp::Named("variance") = output_variances
+    );
+}
+
+//[[Rcpp::export(rng=false)]]
 Rcpp::NumericVector tatami_sums_by_group(SEXP raw_input, Rcpp::IntegerVector group, int num_groups, bool row, int threads) {
     tatami_stats::GroupSumOptions opt;
     opt.num_threads = threads;

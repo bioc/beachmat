@@ -303,6 +303,18 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// tatami_variances
+Rcpp::List tatami_variances(SEXP raw_input, bool row, int threads);
+RcppExport SEXP _beachmat_tatami_variances(SEXP raw_inputSEXP, SEXP rowSEXP, SEXP threadsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< SEXP >::type raw_input(raw_inputSEXP);
+    Rcpp::traits::input_parameter< bool >::type row(rowSEXP);
+    Rcpp::traits::input_parameter< int >::type threads(threadsSEXP);
+    rcpp_result_gen = Rcpp::wrap(tatami_variances(raw_input, row, threads));
+    return rcpp_result_gen;
+END_RCPP
+}
 // tatami_sums_by_group
 Rcpp::NumericVector tatami_sums_by_group(SEXP raw_input, Rcpp::IntegerVector group, int num_groups, bool row, int threads);
 RcppExport SEXP _beachmat_tatami_sums_by_group(SEXP raw_inputSEXP, SEXP groupSEXP, SEXP num_groupsSEXP, SEXP rowSEXP, SEXP threadsSEXP) {
@@ -428,6 +440,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_beachmat_tatami_prefer_rows", (DL_FUNC) &_beachmat_tatami_prefer_rows, 1},
     {"_beachmat_tatami_get", (DL_FUNC) &_beachmat_tatami_get, 3},
     {"_beachmat_tatami_sums", (DL_FUNC) &_beachmat_tatami_sums, 3},
+    {"_beachmat_tatami_variances", (DL_FUNC) &_beachmat_tatami_variances, 3},
     {"_beachmat_tatami_sums_by_group", (DL_FUNC) &_beachmat_tatami_sums_by_group, 5},
     {"_beachmat_tatami_medians", (DL_FUNC) &_beachmat_tatami_medians, 3},
     {"_beachmat_tatami_nan_counts", (DL_FUNC) &_beachmat_tatami_nan_counts, 3},
