@@ -31,8 +31,8 @@ setMethod("initializeCpp", "ANY", function(x, .unknown.action="message", ...) {
         }
     }
 
-    if (is_class_package(x, "alabaster.matrix", c("WrapperArraySeed", "ReloadedArraySeed"))) {
-        # Pass-through some known no-op matrices from alabaster.matrix.
+    if (is_class_package(x, "alabaster.matrix", "DelayedNoOp")) {
+        # Pass-through no-op matrices from alabaster.matrix.
         return(initializeCpp(x@seed, .unknown.action=.unknown.action, ...))
     }
 
